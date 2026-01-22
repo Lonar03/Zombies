@@ -33,6 +33,7 @@ public class Main extends JavaPlugin {
         plugin = this;
         registerCommands();
         registerEvents();
+        registerGuns();
     }
 
     @Override
