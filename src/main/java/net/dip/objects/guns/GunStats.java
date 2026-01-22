@@ -1,5 +1,8 @@
 package net.dip.objects.guns;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class GunStats {
     private final double damage;
     private final int maxAmmo;
@@ -8,7 +11,13 @@ public class GunStats {
     private final double reloadRate;
     private final int pierce;
 
-    public GunStats(double damage, int maxAmmo, int maxClipAmmo, double fireRate, double reloadRate, int pierce) {
+    @JsonCreator
+    public GunStats(@JsonProperty("damage") double damage, 
+                    @JsonProperty("maxAmmo") int maxAmmo, 
+                    @JsonProperty("maxClipAmmo") int maxClipAmmo, 
+                    @JsonProperty("fireRate") double fireRate, 
+                    @JsonProperty("reloadRate") double reloadRate, 
+                    @JsonProperty("pierce") int pierce) {
         this.damage = damage;
         this.maxAmmo = maxAmmo;
         this.maxClipAmmo = maxClipAmmo;

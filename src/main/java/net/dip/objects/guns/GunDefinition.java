@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 import org.bukkit.Material;
 import org.bukkit.Particle;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class GunDefinition {
     private final String id;
@@ -14,7 +16,13 @@ public class GunDefinition {
     private final GunStats baseStats;
     private final List<UltimateLevel> ultimates;
 
-    public GunDefinition(String id, String name, Material item, Particle particle, GunStats baseStats, List<UltimateLevel> ultimates) {
+    @JsonCreator
+    public GunDefinition(@JsonProperty("id") String id, 
+                        @JsonProperty("name") String name, 
+                        @JsonProperty("item") Material item, 
+                        @JsonProperty("particle") Particle particle, 
+                        @JsonProperty("baseStats") GunStats baseStats, 
+                        @JsonProperty("ultimates") List<UltimateLevel> ultimates) {
         this.id = Objects.requireNonNull(id, "id cannot be null");
         this.name = Objects.requireNonNull(name, "name cannot be null");
         this.item = Objects.requireNonNull(item, "item cannot be null");

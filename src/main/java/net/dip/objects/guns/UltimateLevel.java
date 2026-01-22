@@ -1,5 +1,8 @@
 package net.dip.objects.guns;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UltimateLevel {
     private final int level;
     private final Double damage;
@@ -8,7 +11,13 @@ public class UltimateLevel {
     private final Double fireRate;
     private final Double reloadRate;
 
-    public UltimateLevel(int level, Double damage, Integer maxAmmo, Integer maxClipAmmo, Double fireRate, Double reloadRate) {
+    @JsonCreator
+    public UltimateLevel(@JsonProperty("level") int level, 
+                        @JsonProperty("damage") Double damage, 
+                        @JsonProperty("maxAmmo") Integer maxAmmo, 
+                        @JsonProperty("maxClipAmmo") Integer maxClipAmmo, 
+                        @JsonProperty("fireRate") Double fireRate, 
+                        @JsonProperty("reloadRate") Double reloadRate) {
         this.level = level;
         this.damage = damage;
         this.maxAmmo = maxAmmo;
