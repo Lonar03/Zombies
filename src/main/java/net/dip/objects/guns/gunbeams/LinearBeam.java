@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LinearBeam {
     protected final double distance;
-    protected final List<Entity> hitEntities = new ArrayList();
+    protected final List<Entity> hitEntities = new ArrayList<Entity>();
 
     protected final World world;
     protected final Vector particleVector;

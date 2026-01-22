@@ -8,8 +8,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 public class EPlayerConnection implements Listener {
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e){
+    public void onJoin(PlayerJoinEvent event){
         //TODO to handle later
-        Main.getUserManager().createUser(e.getPlayer());
+        Main.getUserManager().createUser(event.getPlayer());
     }
 }

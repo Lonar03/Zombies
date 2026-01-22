@@ -5,7 +5,7 @@ import org.bukkit.Location;
 
 public interface IShop {
 
-    int getGold();
+    int getCost();
     Location getLocation();
-    void purchase(User u);
+    void purchase(User user);
 }

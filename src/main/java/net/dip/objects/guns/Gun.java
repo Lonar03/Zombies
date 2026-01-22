@@ -1,9 +1,9 @@
 package net.dip.objects.guns;
 
-import net.dip.objects.User;
+// import net.dip.objects.User;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.World;
+// import org.bukkit.World;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public abstract class Gun {
      * @param ammo The ammo the gun currently has
      * @param maxAmmo The maximum ammo of the gun
      * @param clipAmmo The clip ammo of the gun
-     * @param maxClipAmmo The maximum clip ammo of hte gun
+     * @param maxClipAmmo The maximum clip ammo of the gun
      * @param fireRate The fire rate of the gun
      * @param reloadRate The reload rate of the gun
      */
