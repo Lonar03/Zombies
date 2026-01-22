@@ -6,24 +6,24 @@ import org.bukkit.Location;
 public class Door implements IShop {
 
     private String name;
-    private int gold;
+    private int cost;
     private Location location;
 
-    public Door(String name, int gold, Location location){
+    public Door(String name, int cost, Location location){
         this.name = name;
-        this.gold = gold;
+        this.cost = cost;
         this.location = location;
     }
 
-    public int getGold(){
-        return gold;
+    public int getCost(){
+        return cost;
     }
 
     public Location getLocation(){
         return location;
     }
 
-    public void purchase(User u){
+    public void purchase(User user){
         //TODO
 
         /*
@@ -33,12 +33,12 @@ public class Door implements IShop {
         - send message if not enough gold
          */
 
-        if(u.getGold() >= this.getGold()){
-            u.setGold(u.getGold() - this.getGold());
+        if(user.getGold() >= this.getCost()){
+            user.takeGold(cost);
             //open door
             //broadcast message
         } else {
-            u.getPlayer().sendMessage("Not enough gold!");
+            user.getPlayer().sendMessage("Not enough gold!");
         }
 
     }

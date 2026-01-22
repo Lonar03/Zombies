@@ -10,10 +10,12 @@ import java.lang.reflect.Method;
  */
 public class Reflection {
 
+   @SuppressWarnings("rawtypes")
    public static Class getNMSClass(String str) {
       return getClass("net.minecraft.server." + getVersion() + "." + str);
    }
 
+   @SuppressWarnings("rawtypes")
    public static Class getCraftClass(String str) {
       return getClass("org.bukkit.craftbukkit." + getVersion() + "." + str);
    }
@@ -34,10 +36,12 @@ public class Reflection {
       return "net.minecraft.server." + getRawVersion() + ".";
    }
 
+   @SuppressWarnings("rawtypes")
    public static Class wrapperToPrimitive(Class var0) {
       return var0 == Boolean.class?Boolean.TYPE:(var0 == Integer.class?Integer.TYPE:(var0 == Double.class?Double.TYPE:(var0 == Float.class?Float.TYPE:(var0 == Long.class?Long.TYPE:(var0 == Short.class?Short.TYPE:(var0 == Byte.class?Byte.TYPE:(var0 == Void.class?Void.TYPE:(var0 == Character.class?Character.TYPE:var0))))))));
    }
 
+   @SuppressWarnings("rawtypes")
    public static Class[] toParamTypes(Object ... var0) {
       Class[] var1 = new Class[var0.length];
 
@@ -48,6 +52,7 @@ public class Reflection {
       return var1;
    }
 
+   @SuppressWarnings({ "rawtypes", "unchecked" })
    public static Enum getEnum(String var0) {
       String[] var1 = var0.split("\\.(?=[^\\.]+$)");
       if(var1.length == 2) {
@@ -60,6 +65,7 @@ public class Reflection {
       }
    }
 
+   @SuppressWarnings("rawtypes")
    public static Class getClass(String var0) {
       try {
          return Class.forName(var0);
@@ -94,8 +100,10 @@ public class Reflection {
       }
    }
 
+   @SuppressWarnings("unchecked")
    public static Object callMethod(Object var0, String var1, Object ... var2) {
       try {
+         @SuppressWarnings("rawtypes")
          Class var3 = var0.getClass();
          Method var4 = var3.getDeclaredMethod(var1, toParamTypes(var2));
          var4.setAccessible(true);
@@ -106,7 +114,7 @@ public class Reflection {
       }
    }
 
-   public static Method getMethod(Object var0, String var1, Class ... var2) {
+   public static Method getMethod(Object var0, String var1, @SuppressWarnings("rawtypes") Class ... var2) {
       try {
          Method var3 = var0.getClass().getMethod(var1, var2);
          if(!var3.isAccessible()) {

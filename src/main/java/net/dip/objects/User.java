@@ -1,7 +1,8 @@
 package net.dip.objects;
 
-import net.dip.enums.PerkType;
 import net.dip.enums.UserStatus;
+import net.dip.objects.perks.Perk;
+
 import org.bukkit.entity.Player;
 
 import static net.dip.utils.Constants.MAX_PERK_COUNT;
@@ -13,7 +14,7 @@ public class User {
     private Player player;
     private int gold;
     private UserStatus status;
-    private PerkType[] perks;
+    private Perk[] perks;
 
     /**
      * Constructor to initialize player defaults
@@ -22,8 +23,8 @@ public class User {
      */
     public User(Player player){
         setPlayer(player);
-        setGold(0);
-        perks = new PerkType[MAX_PERK_COUNT];
+        this.gold = 0;
+        perks = new Perk[MAX_PERK_COUNT];
     }
 
     /**
@@ -53,13 +54,35 @@ public class User {
         return gold;
     }
 
+    // in case i ever need this, but i want to stay away from changing gold directly
+    // /**
+    //  * Sets the gold of the User
+    //  *
+    //  * @param gold the int to set the User's gold to
+    //  */
+    // public void setGold(int gold) {
+    //     this.gold = gold;
+    // }
+
     /**
-     * Sets the gold of the User
+     * Gives the User a certain amount of gold
      *
-     * @param gold the int to set the User's gold to
+     * @param amount the amount of gold to give the User
      */
-    public void setGold(int gold) {
-        this.gold = gold;
+    public void giveGold(int amount){
+        this.gold += amount;
+    }
+
+    /**
+     * Takes a certain amount of gold from the User. will not do anything if User does not have enough gold
+     *
+     * @param amount the amount of gold to take from the User
+     */
+    public void takeGold(int amount){
+        int tempGold = this.gold - amount;
+        if (tempGold >= 0){
+            this.gold = tempGold;
+        }
     }
 
     /**
@@ -85,7 +108,7 @@ public class User {
      *
      * @return an array of perks that the player has
      */
-    public PerkType[] getPerks() {
+    public Perk[] getPerks() {
         return perks;
     }
 
@@ -95,8 +118,8 @@ public class User {
      * @param perk the perk to check
      * @return true if the User has the perk, otherwise false
      */
-    public boolean hasPerk(PerkType perk){
-        for(PerkType p : getPerks()){
+    public boolean hasPerk(Perk perk){
+        for(Perk p : getPerks()){
             if(perk.equals(p)){
                 return true;
             }
@@ -110,17 +133,14 @@ public class User {
      * @param perk the perk to set
      * @param slot the slot to set
      */
-    public void setPerk(PerkType perk, int slot){
+    public void setPerk(Perk perk, int slot){
         this.perks[slot] = perk;
     }
 
     /**
-     * Sets all slots to designated perks.
-     *
-     * @param perks the perks to set the slots to
+     * Clears all perks of the User.
      */
-    public void setPerk(PerkType... perks){
-        if(perks.length == MAX_PERK_COUNT)
-            this.perks = perks;
+    public void clearPerks(){
+        this.perks = new Perk[MAX_PERK_COUNT];
     }
 }

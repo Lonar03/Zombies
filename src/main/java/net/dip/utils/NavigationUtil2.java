@@ -1,8 +1,8 @@
 package net.dip.utils;
 
-import jdk.internal.jline.internal.Nullable;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Method;
 
