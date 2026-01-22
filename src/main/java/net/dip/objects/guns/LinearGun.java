@@ -2,7 +2,6 @@ package net.dip.objects.guns;
 
 import net.dip.objects.guns.gunbeams.LinearBeam;
 import org.bukkit.Material;
-import org.bukkit.Particle;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;

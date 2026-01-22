@@ -1,8 +1,5 @@
 package net.dip.objects.guns;
 
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 import org.bukkit.Particle;
 
 /**
