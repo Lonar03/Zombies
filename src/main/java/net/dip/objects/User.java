@@ -1,7 +1,8 @@
 package net.dip.objects;
 
-import net.dip.enums.PerkType;
 import net.dip.enums.UserStatus;
+import net.dip.objects.perks.Perk;
+
 import org.bukkit.entity.Player;
 
 import static net.dip.utils.Constants.MAX_PERK_COUNT;
@@ -13,7 +14,7 @@ public class User {
     private Player player;
     private int gold;
     private UserStatus status;
-    private PerkType[] perks;
+    private Perk[] perks;
 
     /**
      * Constructor to initialize player defaults
@@ -23,7 +24,7 @@ public class User {
     public User(Player player){
         setPlayer(player);
         this.gold = 0;
-        perks = new PerkType[MAX_PERK_COUNT];
+        perks = new Perk[MAX_PERK_COUNT];
     }
 
     /**
@@ -107,7 +108,7 @@ public class User {
      *
      * @return an array of perks that the player has
      */
-    public PerkType[] getPerks() {
+    public Perk[] getPerks() {
         return perks;
     }
 
@@ -117,8 +118,8 @@ public class User {
      * @param perk the perk to check
      * @return true if the User has the perk, otherwise false
      */
-    public boolean hasPerk(PerkType perk){
-        for(PerkType p : getPerks()){
+    public boolean hasPerk(Perk perk){
+        for(Perk p : getPerks()){
             if(perk.equals(p)){
                 return true;
             }
@@ -132,7 +133,7 @@ public class User {
      * @param perk the perk to set
      * @param slot the slot to set
      */
-    public void setPerk(PerkType perk, int slot){
+    public void setPerk(Perk perk, int slot){
         this.perks[slot] = perk;
     }
 
@@ -140,6 +141,6 @@ public class User {
      * Clears all perks of the User.
      */
     public void clearPerks(){
-        this.perks = new PerkType[MAX_PERK_COUNT];
+        this.perks = new Perk[MAX_PERK_COUNT];
     }
 }
