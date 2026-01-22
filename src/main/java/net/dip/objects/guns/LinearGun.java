@@ -13,16 +13,9 @@ import java.util.Set;
 
 public class LinearGun extends Gun {
 
-    protected final int maxHitEntities;
-
-    /**
-     * Creates a gun like the Gun superclass
-     *
-     * @param maxHitEntities The maximum number of entities the gun can pass through
-     */
-    LinearGun(String name, Material item, Particle particle, int gunRange, double damage, int ammo, int maxAmmo, int clipAmmo, int maxClipAmmo, double fireRate, double reloadRate, int maxHitEntities) {
-        super(name, item, particle, gunRange, damage, ammo, maxAmmo, clipAmmo, maxClipAmmo, fireRate, reloadRate);
-        this.maxHitEntities = maxHitEntities;
+    public LinearGun(GunDefinition def) {
+        super(def);
+        // why tf do i need to write this again bruhhhhhhh
     }
 
     public void shoot(Player player){
@@ -40,7 +33,7 @@ public class LinearGun extends Gun {
     }
 
     private void sendShot(World world, Vector particleLocation, Vector particleDirection, Vector targetBlockVector) {
-        LinearBeam beam = new LinearBeam(world, particle, particleLocation, particleDirection, targetBlockVector, maxHitEntities);
+        LinearBeam beam = new LinearBeam(world, particle, particleLocation, particleDirection, targetBlockVector, getCurrentStats().pierce());
         beam.send();
     }
 
@@ -52,8 +45,8 @@ public class LinearGun extends Gun {
 
         // TODO: Add slab blocks
 
-        BoundingBox targetedBlockBoundingBox = player.getTargetBlock(materials, gunRange).getBoundingBox();
+        BoundingBox targetedBlockBoundingBox = player.getTargetBlock(materials, 1000).getBoundingBox();
 
-        return targetedBlockBoundingBox.rayTrace(eyeLocation, eyeDirection, gunRange).getHitPosition();
+        return targetedBlockBoundingBox.rayTrace(eyeLocation, eyeDirection, 1000).getHitPosition();
     }
 }

@@ -4,14 +4,19 @@ import net.dip.commands.CommandTest;
 import net.dip.listeners.EPlayerClick;
 import net.dip.managers.GameManager;
 import net.dip.managers.UserManager;
+import net.dip.objects.guns.GunLoader;
+import net.dip.objects.guns.GunDefinition;
 import net.dip.objects.guns.Gun;
-import net.dip.objects.guns.Pistol;
+import net.dip.objects.guns.GunRegistry;
+import java.io.File;
+import java.io.InputStream;
+import java.util.Objects;
+
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,12 +33,34 @@ public class Main extends JavaPlugin {
         plugin = this;
         registerCommands();
         registerEvents();
-        registerGuns();
     }
 
     @Override
     public void onDisable(){
 
+    }
+
+    /**
+     * Registers all guns
+     */
+    private void registerGuns(){
+        GunRegistry registry = new GunRegistry();
+
+        File gunsDir = new File(Objects.requireNonNull(
+            getClassLoader().getResource("guns")
+            ).getFile());
+
+        for (String file : Objects.requireNonNull(gunsDir.list())) {
+
+            try (InputStream in = getClassLoader().getResourceAsStream("guns/" + file)) {
+                GunDefinition def = GunLoader.load(in);
+                registry.register(def);
+
+            } catch (Exception e) {
+                getLogger().severe("Failed to load gun: " + file);
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -48,14 +75,6 @@ public class Main extends JavaPlugin {
      */
     private void registerCommands(){
         getCommand("test").setExecutor(new CommandTest());
-    }
-
-    /**
-     * Initialize all guns
-     */
-    private void registerGuns(){
-        guns = new ArrayList<>();
-        guns.add(new Pistol());
     }
 
     /**
